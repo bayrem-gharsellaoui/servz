@@ -10,7 +10,7 @@ namespace MyProject
 
 class Service
 {
-public:
+      public:
 	Service(const Service &) = delete;
 	Service &operator=(const Service &) = delete;
 
@@ -27,19 +27,28 @@ public:
 	 *
 	 * @param event Event identifier.
 	 *
-	 * @return true if subscribed, otherwise false.
+	 * @return true if the service subscribes to the event.
 	 */
 	[[nodiscard]]
 	bool subscribes_to(EventId event) const;
 
 	/**
-	 * @brief Queue an event for processing by the service.
+	 * @brief Post an event to the service.
 	 *
 	 * @param event Event identifier.
 	 *
 	 * @return 0 on success, otherwise a negative error code.
 	 */
 	int post_event(EventId event);
+
+	/**
+	 * @brief Invoke a callable for each registered service.
+	 *
+	 * @tparam Callable Callable type accepting a Service reference.
+	 * @param callable Callable to invoke for each registered service.
+	 */
+	template <typename Callable>
+	static void for_each(Callable &&callable);
 
 	/**
 	 * @brief Zephyr thread entry point.
@@ -76,7 +85,7 @@ protected:
 	 */
 	virtual void on_event(EventId event) = 0;
 
-private:
+      private:
 	void run();
 
 	const char *m_name;
@@ -86,19 +95,30 @@ private:
 
 } // namespace MyProject
 
-/**
- * @brief Service registration entry.
- */
 struct service_registration {
 	MyProject::Service *service;
 };
 
 /**
- * @brief Define and register a service.
+ * @brief Invoke a callable for each registered service.
  *
- * Creates the service event queue, service instance, static kernel thread,
- * and iterable-section registration entry.
+ * @tparam Callable Callable type accepting a Service reference.
+ * @param callable Callable to invoke for each registered service.
  */
+template <typename Callable>
+void service_for_each(Callable &&callable)
+{
+	STRUCT_SECTION_FOREACH(service_registration, registration) {
+		callable(*registration->service);
+	}
+}
+
+template <typename Callable>
+void MyProject::Service::for_each(Callable &&callable)
+{
+	::service_for_each(static_cast<Callable &&>(callable));
+}
+
 #define SERVICE_DEFINE(instance_name, service_type, stack_size, priority, queue_depth, ...)        \
 	K_MSGQ_DEFINE_STATIC_TYPE(instance_name##_queue, MyProject::EventId, queue_depth);         \
                                                                                                    \
@@ -110,8 +130,3 @@ struct service_registration {
                                                                                                    \
 	const STRUCT_SECTION_ITERABLE(service_registration,                                        \
 				      instance_name##_registration) = {&instance_name}
-
-/**
- * @brief Iterate over all registered services.
- */
-#define SERVICE_FOREACH(iterator) STRUCT_SECTION_FOREACH(service_registration, iterator)

@@ -4,23 +4,23 @@ LOG_MODULE_REGISTER(event_manager, LOG_LEVEL_INF);
 #include "event_manager.hpp"
 #include "service.hpp"
 
-static void publish_event(MyProject::EventId event)
+bool MyProject::EventManager::publish(EventId event)
 {
-	SERVICE_FOREACH(registration)
-	{
-		auto &service = *registration->service;
+	bool delivered = true;
 
+	Service::for_each([event, &delivered](Service &service) {
 		if (!service.subscribes_to(event)) {
-			continue;
+			return;
 		}
 
-		if (service.post_event(event) != 0) {
-			LOG_ERR("Event queue full for %s", service.get_name());
-		}
-	}
-}
+		const int ret = service.post_event(event);
 
-void MyProject::EventManager::publish(EventId event)
-{
-	publish_event(event);
+		if (ret != 0) {
+			LOG_ERR("Failed to post event to %s: %d", service.get_name(), ret);
+
+			delivered = false;
+		}
+	});
+
+	return delivered;
 }

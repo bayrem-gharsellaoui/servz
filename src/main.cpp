@@ -8,10 +8,8 @@ int main()
 {
 	LOG_INF("Registered services:");
 
-	SERVICE_FOREACH(registration)
-	{
-		LOG_INF("- %s", registration->service->get_name());
-	}
+	MyProject::Service::for_each(
+		[](MyProject::Service &service) { LOG_INF("- %s", service.get_name()); });
 
 	while (true) {
 		k_msleep(1000);
