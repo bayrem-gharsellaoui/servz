@@ -15,6 +15,7 @@ target_include_directories(app PRIVATE
 target_sources(app PRIVATE
   src/main.cpp
   src/heap_trap.cpp
+  src/event_manager.cpp
   src/service.cpp
   src/service_a.cpp
   src/service_b.cpp

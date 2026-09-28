@@ -23,6 +23,25 @@ public:
 	const char *get_name() const;
 
 	/**
+	 * @brief Check whether the service subscribes to an event.
+	 *
+	 * @param event Event identifier.
+	 *
+	 * @return true if subscribed, otherwise false.
+	 */
+	[[nodiscard]]
+	bool subscribes_to(EventId event) const;
+
+	/**
+	 * @brief Queue an event for processing by the service.
+	 *
+	 * @param event Event identifier.
+	 *
+	 * @return 0 on success, otherwise a negative error code.
+	 */
+	int post_event(EventId event);
+
+	/**
 	 * @brief Zephyr thread entry point.
 	 *
 	 * @param p1 Pointer to the service instance.

@@ -12,9 +12,5 @@ protected:
 	void on_event(MyProject::EventId event) override;
 
 private:
-	enum class Event : MyProject::EventId {
-		Dummy,
-	};
-
-	static constexpr auto Subscriptions = MyProject::EventMask::of(Event::Dummy);
+	static constexpr MyProject::EventMask Subscriptions{};
 };

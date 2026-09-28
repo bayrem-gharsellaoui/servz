@@ -13,6 +13,16 @@ const char *Service::get_name() const
 	return m_name;
 }
 
+bool Service::subscribes_to(EventId event) const
+{
+	return m_subscriptions.contains(event);
+}
+
+int Service::post_event(EventId event)
+{
+	return k_msgq_put(&m_event_queue, &event, K_NO_WAIT);
+}
+
 void Service::thread_trampoline(void *p1, void *, void *)
 {
 	auto *self = static_cast<Service *>(p1);
