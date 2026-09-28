@@ -1,11 +1,12 @@
 #include <zephyr/kernel.h>
-#include <zephyr/sys/printk.h>
+#include <zephyr/logging/log.h>
+LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
-int main(void)
+int main()
 {
-	printk("Hello world\r\n");
+	LOG_INF("Hello world!");
 
-	while (1) {
+	while (true) {
 		k_msleep(1000);
 	}
 

@@ -1,5 +1,6 @@
 #include <zephyr/kernel.h>
-#include <zephyr/sys/__assert.h>
+#include <zephyr/logging/log.h>
+LOG_MODULE_REGISTER(heap_trap, LOG_LEVEL_INF);
 
 #include <cstddef>
 
@@ -14,13 +15,15 @@ namespace
 [[noreturn]]
 void heap_trap(const char *operation)
 {
-	__ASSERT(false, "CRITICAL: Dynamic allocation attempted: %s", operation);
+	LOG_ERR("Dynamic allocation attempted: %s", operation);
 
 	/*
 	 * __ASSERT may be compiled out, so this guarantees that
 	 * dynamic allocation still fails in non-assert builds.
 	 */
 	k_panic();
+
+	CODE_UNREACHABLE;
 }
 
 } // namespace
