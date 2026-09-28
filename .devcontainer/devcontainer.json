@@ -2,7 +2,7 @@
   "image": "ghcr.io/zephyrproject-rtos/ci-base:main",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workdir/application,type=bind",
   "workspaceFolder": "/workdir",
-  "postCreateCommand": "west init -l application && west update --narrow && west zephyr-export",
+  "postCreateCommand": "bash application/.devcontainer/post-create.sh",
   "remoteUser": "user",
   "containerEnv": {
     "ZEPHYR_BASE": "/workdir/zephyr",
