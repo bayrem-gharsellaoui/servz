@@ -1,0 +1,64 @@
+{
+  "image": "ghcr.io/zephyrproject-rtos/ci-base:main",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workdir/application,type=bind",
+  "workspaceFolder": "/workdir",
+  "postCreateCommand": "west init -l application && west update --narrow && west zephyr-export",
+  "remoteUser": "user",
+  "containerEnv": {
+    "ZEPHYR_BASE": "/workdir/zephyr",
+    "ZEPHYR_TOOLCHAIN_VARIANT": "host/gnu"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.renderWhitespace": "all",
+        "editor.rulers": [100],
+        "editor.fontFamily": "'Fira Code', monospace",
+        "editor.fontLigatures": true,
+        "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+        "C_Cpp.default.compileCommands": "/workdir/application/build/compile_commands.json",
+        "files.associations": {
+          "*.overlay": "dts",
+          "*.dts": "dts",
+          "*.dtsi": "dts",
+          ".config": "makefile"
+        }
+      },
+      "keybindings": [
+        {
+          "key": "ctrl+j",
+          "command": "editor.action.joinLines",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "ctrl+shift+k",
+          "command": "editor.action.commentLine",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "ctrl+alt+k",
+          "command": "editor.action.blockComment",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "ctrl+t",
+          "command": "workbench.action.terminal.new",
+          "when": "editorTextFocus"
+        },
+        {
+          "key": "alt+left",
+          "command": "workbench.action.navigateBack"
+        },
+        {
+          "key": "alt+right",
+          "command": "workbench.action.navigateForward"
+        }
+      ],
+      "extensions": [
+        "ms-vscode.cpptools",
+        "plorefice.devicetree"
+      ]
+    }
+  }
+}
