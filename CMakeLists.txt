@@ -15,4 +15,17 @@ target_include_directories(app PRIVATE
 target_sources(app PRIVATE
   src/main.cpp
   src/heap_trap.cpp
+  src/service.cpp
+  src/service_a.cpp
+  src/service_b.cpp
+)
+
+zephyr_iterable_section(
+  NAME service_registration
+  GROUP RODATA_REGION
+)
+
+zephyr_linker_sources(
+  SECTIONS
+  sections-rom.ld
 )
