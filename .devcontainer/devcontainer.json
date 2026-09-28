@@ -16,6 +16,7 @@
         "editor.rulers": [100],
         "editor.fontFamily": "'Fira Code', monospace",
         "editor.fontLigatures": true,
+        "workbench.iconTheme": "material-icon-theme",
         "C_Cpp.default.compilerPath": "/usr/bin/gcc",
         "C_Cpp.default.compileCommands": "/workdir/application/build/compile_commands.json",
         "files.associations": {
@@ -57,7 +58,11 @@
       ],
       "extensions": [
         "ms-vscode.cpptools",
-        "plorefice.devicetree"
+        "ms-vscode.vscode-embedded-tools",
+        "plorefice.devicetree",
+        "PKief.material-icon-theme",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens"
       ]
     }
   }
