@@ -1,0 +1,99 @@
+#include <zephyr/kernel.h>
+#include <zephyr/sys/__assert.h>
+
+#include <cstddef>
+
+namespace
+{
+
+/**
+ * @brief Trap an attempted dynamic memory operation.
+ *
+ * @param operation Name of the attempted allocation or deallocation operation.
+ */
+[[noreturn]]
+void heap_trap(const char *operation)
+{
+	__ASSERT(false, "CRITICAL: Dynamic allocation attempted: %s", operation);
+
+	/*
+	 * __ASSERT may be compiled out, so this guarantees that
+	 * dynamic allocation still fails in non-assert builds.
+	 */
+	k_panic();
+}
+
+} // namespace
+
+extern "C" {
+
+/**
+ * @brief Trap use of malloc().
+ *
+ * @param size Requested allocation size in bytes.
+ *
+ * @return This function never returns.
+ */
+void *malloc([[maybe_unused]] std::size_t size)
+{
+	heap_trap("malloc");
+}
+
+/**
+ * @brief Trap use of calloc().
+ *
+ * @param num Number of elements to allocate.
+ * @param size Size of each element in bytes.
+ *
+ * @return This function never returns.
+ */
+void *calloc([[maybe_unused]] std::size_t num, [[maybe_unused]] std::size_t size)
+{
+	heap_trap("calloc");
+}
+
+/**
+ * @brief Trap use of realloc().
+ *
+ * @param ptr Pointer to the existing allocation.
+ * @param size Requested new allocation size in bytes.
+ *
+ * @return This function never returns.
+ */
+void *realloc([[maybe_unused]] void *ptr, [[maybe_unused]] std::size_t size)
+{
+	heap_trap("realloc");
+}
+
+/**
+ * @brief Trap use of aligned_alloc().
+ *
+ * This also catches aligned C++ new and new[] when using Zephyr's
+ * minimal C++ library.
+ *
+ * @param alignment Requested allocation alignment.
+ * @param size Requested allocation size in bytes.
+ *
+ * @return This function never returns.
+ */
+void *aligned_alloc([[maybe_unused]] std::size_t alignment, [[maybe_unused]] std::size_t size)
+{
+	heap_trap("aligned_alloc");
+}
+
+/**
+ * @brief Trap use of free().
+ *
+ * A null pointer is accepted and ignored to preserve standard free()
+ * semantics.
+ *
+ * @param ptr Pointer to the memory being released.
+ */
+void free(void *ptr)
+{
+	if (ptr != nullptr) {
+		heap_trap("free");
+	}
+}
+
+} // extern "C"
