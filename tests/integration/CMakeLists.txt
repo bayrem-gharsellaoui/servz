@@ -14,6 +14,9 @@ target_include_directories(app PRIVATE
 )
 
 target_sources(app PRIVATE
-  src/main.cpp
   src/test_services.cpp
+  src/registration_test.cpp
+  src/delivery_test.cpp
+  src/overflow_test.cpp
+  src/startup_test.cpp
 )
