@@ -1,8 +1,8 @@
+#include <cstddef>
+
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(heap_trap, LOG_LEVEL_INF);
-
-#include <cstddef>
 
 namespace
 {
@@ -16,6 +16,8 @@ namespace
 void heap_trap(const char *operation)
 {
 	LOG_ERR("Dynamic allocation attempted: %s", operation);
+
+	__ASSERT(false, "Dynamic allocation attempted: %s", operation);
 
 	/*
 	 * __ASSERT may be compiled out, so this guarantees that
@@ -71,9 +73,6 @@ void *realloc([[maybe_unused]] void *ptr, [[maybe_unused]] std::size_t size)
 /**
  * @brief Trap use of aligned_alloc().
  *
- * This also catches aligned C++ new and new[] when using Zephyr's
- * minimal C++ library.
- *
  * @param alignment Requested allocation alignment.
  * @param size Requested allocation size in bytes.
  *
@@ -86,9 +85,6 @@ void *aligned_alloc([[maybe_unused]] std::size_t alignment, [[maybe_unused]] std
 
 /**
  * @brief Trap use of free().
- *
- * A null pointer is accepted and ignored to preserve standard free()
- * semantics.
  *
  * @param ptr Pointer to the memory being released.
  */
