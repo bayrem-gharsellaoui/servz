@@ -20,7 +20,7 @@ jobs:
       matrix:
         board:
           - native_sim
-          - nucleo_f439zi
+          - nucleo_u575zi_q
 
     steps:
       - name: Checkout servz

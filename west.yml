@@ -14,7 +14,7 @@ manifest:
   projects:
     - name: zephyr
       repo-path: zephyr
-      revision: v4.4.2
+      revision: main
       path: zephyr
       west-commands: scripts/west-commands.yml
 
