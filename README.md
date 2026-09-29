@@ -25,3 +25,15 @@ Run the application executable:
 ```bash
 ./build/zephyr/zephyr.exe
 ```
+
+Run integration tests:
+
+```bash
+west twister -T tests/integration/
+```
+
+Run unit tests:
+
+```bash
+west twister -T tests/unit/
+```

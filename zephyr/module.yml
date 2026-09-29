@@ -8,7 +8,8 @@ build:
   cmake: .
 
 samples:
-  - samples
+  - samples/basic
 
 tests:
-  - tests
+  - tests/unit
+  - tests/integration
