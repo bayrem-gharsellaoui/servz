@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "event.hpp"
+#include <servz/event.hpp>
 
 enum class Event : servz::EventId {
 	ServiceAStarted,

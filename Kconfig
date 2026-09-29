@@ -3,8 +3,8 @@
 
 menuconfig SERVZ
 	bool "servz support"
-	depends on CONFIG_CPP
-	depends on CONFIG_STD_CPP17
+	depends on CPP
+	depends on STD_CPP17
 	help
 		Enable C++ support.
 
