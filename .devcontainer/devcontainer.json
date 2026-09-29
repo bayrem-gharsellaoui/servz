@@ -1,8 +1,8 @@
 {
   "image": "ghcr.io/zephyrproject-rtos/ci-base:main",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workdir/servz,type=bind",
-  "workspaceFolder": "/workdir/servz",
-  "postCreateCommand": "bash /workdir/servz/.devcontainer/post-create.sh",
+  "workspaceFolder": "/workdir",
+  "postCreateCommand": "bash servz/.devcontainer/post-create.sh",
   "remoteUser": "user",
   "containerEnv": {
     "ZEPHYR_BASE": "/workdir/zephyr",
@@ -21,7 +21,7 @@
         "editor.fontLigatures": true,
         "workbench.iconTheme": "material-icon-theme",
         "C_Cpp.default.compilerPath": "/usr/bin/gcc",
-        "C_Cpp.default.compileCommands": "/workdir/build/compile_commands.json",
+        "C_Cpp.default.compileCommands": "/workdir/servz/build/compile_commands.json",
         "files.associations": {
           "*.overlay": "dts",
           "*.dts": "dts",

@@ -6,7 +6,7 @@
 #pragma once
 
 #include "app_event.hpp"
-#include "service.hpp"
+#include <servz/service.hpp>
 
 class ServiceB final: public servz::Service
 {

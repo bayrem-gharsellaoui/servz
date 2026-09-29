@@ -6,8 +6,8 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(event_manager, LOG_LEVEL_INF);
 
-#include "event_manager.hpp"
-#include "service.hpp"
+#include <servz/event_manager.hpp>
+#include <servz/service.hpp>
 
 bool servz::EventManager::publish(EventId event)
 {

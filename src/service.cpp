@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include "service.hpp"
+#include <servz/service.hpp>
 
 namespace servz
 {

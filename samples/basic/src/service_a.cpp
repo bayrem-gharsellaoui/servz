@@ -7,9 +7,9 @@
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(service_a, LOG_LEVEL_INF);
 
+#include <servz/event_manager.hpp>
 #include "service_a.hpp"
 #include "app_event.hpp"
-#include "event_manager.hpp"
 
 ServiceA::ServiceA(const char *name, k_msgq &event_queue)
 	: Service(name, event_queue, Subscriptions)

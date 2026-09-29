@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "service.hpp"
+#include <servz/service.hpp>
 
 class ServiceA final: public servz::Service
 {
