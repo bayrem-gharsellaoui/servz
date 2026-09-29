@@ -9,6 +9,11 @@ list(APPEND EXTRA_ZEPHYR_MODULES
   ${CMAKE_CURRENT_LIST_DIR}/../..
 )
 
+target_include_directories(app PRIVATE
+  include
+)
+
 target_sources(app PRIVATE
   src/main.cpp
+  src/test_services.cpp
 )

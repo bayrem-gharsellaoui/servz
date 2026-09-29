@@ -33,4 +33,4 @@ void ServiceB::on_event(servz::EventId event)
 	}
 }
 
-SERVICE_DEFINE(service_b, ServiceB, 1024, 5, 8);
+SERVZ_SERVICE_DEFINE(service_b, ServiceB, 1024, 5, 8);

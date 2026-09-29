@@ -30,4 +30,4 @@ void ServiceA::on_event(servz::EventId event)
 	ARG_UNUSED(event);
 }
 
-SERVICE_DEFINE(service_a, ServiceA, 1024, 5, 8);
+SERVZ_SERVICE_DEFINE(service_a, ServiceA, 1024, 5, 8);

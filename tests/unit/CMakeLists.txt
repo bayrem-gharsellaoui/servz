@@ -5,6 +5,10 @@ cmake_minimum_required(VERSION 3.28.0)
 project(servz_unit_test)
 find_package(Zephyr COMPONENTS unittest REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
+target_include_directories(testbinary PRIVATE
+  ${CMAKE_CURRENT_LIST_DIR}/../../include
+)
+
 target_sources(testbinary PRIVATE
   src/main.cpp
 )

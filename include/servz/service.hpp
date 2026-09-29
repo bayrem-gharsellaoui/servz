@@ -123,7 +123,7 @@ template <typename Callable> void servz::Service::for_each(Callable &&callable)
 	::service_for_each(static_cast<Callable &&>(callable));
 }
 
-#define SERVICE_DEFINE(instance_name, service_type, stack_size, priority, queue_depth, ...)        \
+#define SERVZ_SERVICE_DEFINE(instance_name, service_type, stack_size, priority, queue_depth, ...)  \
 	K_MSGQ_DEFINE_STATIC_TYPE(instance_name##_queue, servz::EventId, queue_depth);             \
                                                                                                    \
 	static service_type instance_name{#instance_name, instance_name##_queue, ##__VA_ARGS__};   \
