@@ -1,10 +1,15 @@
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(event_manager, LOG_LEVEL_INF);
 
 #include "event_manager.hpp"
 #include "service.hpp"
 
-bool MyProject::EventManager::publish(EventId event)
+bool servz::EventManager::publish(EventId event)
 {
 	bool delivered = true;
 

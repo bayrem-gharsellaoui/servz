@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(app, LOG_LEVEL_INF);
@@ -8,8 +13,8 @@ int main()
 {
 	LOG_INF("Registered services:");
 
-	MyProject::Service::for_each(
-		[](MyProject::Service &service) { LOG_INF("- %s", service.get_name()); });
+	servz::Service::for_each(
+		[](servz::Service &service) { LOG_INF("- %s", service.get_name()); });
 
 	while (true) {
 		k_msleep(1000);

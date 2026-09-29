@@ -1,8 +1,13 @@
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #pragma once
 
 #include "event.hpp"
 
-namespace MyProject
+namespace servz
 {
 
 class EventManager
@@ -20,4 +25,4 @@ public:
 	static bool publish(EventId event);
 };
 
-} // namespace MyProject
+} // namespace servz

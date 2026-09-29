@@ -1,4 +1,9 @@
 
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(service_b, LOG_LEVEL_INF);
 
@@ -14,7 +19,7 @@ void ServiceB::on_start()
 	LOG_INF("%s started", get_name());
 }
 
-void ServiceB::on_event(MyProject::EventId event)
+void ServiceB::on_event(servz::EventId event)
 {
 	switch (static_cast<Event>(event)) {
 	case Event::ServiceAStarted: {

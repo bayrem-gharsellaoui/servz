@@ -1,16 +1,21 @@
-#pragma once
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-#include "event.hpp"
+#pragma once
 
 #include <zephyr/kernel.h>
 #include <zephyr/sys/iterable_sections.h>
 
-namespace MyProject
+#include "event.hpp"
+
+namespace servz
 {
 
 class Service
 {
-      public:
+public:
 	Service(const Service &) = delete;
 	Service &operator=(const Service &) = delete;
 
@@ -85,7 +90,7 @@ protected:
 	 */
 	virtual void on_event(EventId event) = 0;
 
-      private:
+private:
 	void run();
 
 	const char *m_name;
@@ -93,10 +98,10 @@ protected:
 	EventMask m_subscriptions;
 };
 
-} // namespace MyProject
+} // namespace servz
 
 struct service_registration {
-	MyProject::Service *service;
+	servz::Service *service;
 };
 
 /**
@@ -113,19 +118,18 @@ void service_for_each(Callable &&callable)
 	}
 }
 
-template <typename Callable>
-void MyProject::Service::for_each(Callable &&callable)
+template <typename Callable> void servz::Service::for_each(Callable &&callable)
 {
 	::service_for_each(static_cast<Callable &&>(callable));
 }
 
 #define SERVICE_DEFINE(instance_name, service_type, stack_size, priority, queue_depth, ...)        \
-	K_MSGQ_DEFINE_STATIC_TYPE(instance_name##_queue, MyProject::EventId, queue_depth);         \
+	K_MSGQ_DEFINE_STATIC_TYPE(instance_name##_queue, servz::EventId, queue_depth);             \
                                                                                                    \
 	static service_type instance_name{#instance_name, instance_name##_queue, ##__VA_ARGS__};   \
                                                                                                    \
 	K_KERNEL_THREAD_DEFINE(instance_name##_thread, stack_size,                                 \
-			       MyProject::Service::thread_trampoline, &instance_name, nullptr,     \
+			       servz::Service::thread_trampoline, &instance_name, nullptr,         \
 			       nullptr, priority, 0, 0);                                           \
                                                                                                    \
 	const STRUCT_SECTION_ITERABLE(service_registration,                                        \

@@ -1,6 +1,11 @@
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include "service.hpp"
 
-namespace MyProject
+namespace servz
 {
 
 Service::Service(const char *name, k_msgq &event_queue, EventMask subscriptions)
@@ -42,4 +47,4 @@ void Service::run()
 	}
 }
 
-} // namespace MyProject
+} // namespace servz

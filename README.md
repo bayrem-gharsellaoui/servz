@@ -1,4 +1,4 @@
-# zephyr-cpp-arch
+# servz
 
 ## Build instructions
 

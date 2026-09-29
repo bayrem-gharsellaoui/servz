@@ -1,4 +1,9 @@
 
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(service_a, LOG_LEVEL_INF);
 
@@ -17,10 +22,10 @@ void ServiceA::on_start()
 
 	LOG_INF("Publishing ServiceAStarted");
 
-	MyProject::EventManager::publish(static_cast<MyProject::EventId>(Event::ServiceAStarted));
+	servz::EventManager::publish(static_cast<servz::EventId>(Event::ServiceAStarted));
 }
 
-void ServiceA::on_event(MyProject::EventId event)
+void ServiceA::on_event(servz::EventId event)
 {
 	ARG_UNUSED(event);
 }

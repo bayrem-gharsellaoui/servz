@@ -1,8 +1,13 @@
+/*
+ * Copyright (c) 2026 Bayrem Gharsellaoui
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 #pragma once
 
 #include <stdint.h>
 
-namespace MyProject
+namespace servz
 {
 
 using EventId = uint8_t;
@@ -36,4 +41,4 @@ private:
 	uint32_t m_bits{0U};
 };
 
-} // namespace MyProject
+} // namespace servz

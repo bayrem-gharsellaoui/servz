@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Bayrem Gharsellaoui
+# SPDX-License-Identifier: Apache-2.0
+
 #!/usr/bin/env bash
 
 # Stop on a failed command (-e), an unset variable (-u), or a failed
