@@ -1,0 +1,44 @@
+# Copyright (c) 2026 Bayrem Gharsellaoui
+# SPDX-License-Identifier: Apache-2.0
+
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout servz
+        uses: actions/checkout@v4
+        with:
+          path: servz
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Zephyr
+        uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          app-path: servz
+          toolchains: arm-zephyr-eabi
+          sdk-version: 1.0.1
+
+      - name: Run unit tests
+        working-directory: servz
+        run: |
+          west twister -T tests/unit --inline-logs
+
+      - name: Run integration tests
+        working-directory: servz
+        run: |
+          west twister -T tests/integration --inline-logs

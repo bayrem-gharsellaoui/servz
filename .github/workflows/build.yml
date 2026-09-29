@@ -1,0 +1,46 @@
+# Copyright (c) 2026 Bayrem Gharsellaoui
+# SPDX-License-Identifier: Apache-2.0
+
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        board:
+          - native_sim
+          - nucleo_f439zi
+
+    steps:
+      - name: Checkout servz
+        uses: actions/checkout@v4
+        with:
+          path: servz
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Zephyr
+        uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          app-path: servz
+          toolchains: arm-zephyr-eabi
+          sdk-version: 1.0.1
+
+      - name: Build sample
+        working-directory: servz
+        run: |
+          west build -b ${{ matrix.board }} samples/basic

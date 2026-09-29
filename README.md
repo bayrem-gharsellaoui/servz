@@ -1,5 +1,16 @@
 # servz
 
+[![Build](https://github.com/bayrem-gharsellaoui/servz/actions/workflows/build.yml/badge.svg)](https://github.com/bayrem-gharsellaoui/servz/actions/workflows/build.yml)
+[![Test](https://github.com/bayrem-gharsellaoui/servz/actions/workflows/test.yml/badge.svg)](https://github.com/bayrem-gharsellaoui/servz/actions/workflows/test.yml)
+[![Zephyr](https://img.shields.io/badge/Zephyr-4.4.2-blue)](https://github.com/zephyrproject-rtos/zephyr/releases/tag/v4.4.2)
+[![Zephyr SDK](https://img.shields.io/badge/Zephyr%20SDK-1.0.1-blue)](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v1.0.1)
+[![C++](https://img.shields.io/badge/C%2B%2B-17-blue)](https://en.cppreference.com/w/cpp/17)
+[![Release](https://img.shields.io/github/v/release/bayrem-gharsellaoui/servz)](https://github.com/bayrem-gharsellaoui/servz/releases)
+
+**servz** is a tiny C++ service framework for Zephyr using static services, bounded event queues, compile-time subscriptions, and no heap required.
+
+Think small active objects with just enough structure to stay tidy without turning your firmware into framework soup.
+
 ## Build instructions
 
 Format code:
