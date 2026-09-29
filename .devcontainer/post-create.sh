@@ -13,9 +13,9 @@ cd /workdir
 
 # Initialise west only if this workspace has not been initialised yet.
 if [ ! -d .west ]; then
-    west init -l application
+    west init -l servz
 fi
 
 # Download the projects listed in west.yml, then register Zephyr with CMake.
-west update --narrow
+west update
 west zephyr-export

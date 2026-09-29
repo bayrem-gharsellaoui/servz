@@ -1,0 +1,14 @@
+# Copyright (c) 2026 Bayrem Gharsellaoui
+# SPDX-License-Identifier: Apache-2.0
+
+name: servz
+
+build:
+  kconfig: Kconfig
+  cmake: .
+
+samples:
+  - samples
+
+tests:
+  - tests

@@ -1,0 +1,17 @@
+# Copyright (c) 2026 Bayrem Gharsellaoui
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig SERVZ
+	bool "servz support"
+	depends on CONFIG_CPP
+	depends on CONFIG_STD_CPP17
+	help
+		Enable C++ support.
+
+if SERVZ
+
+module = SERVZ
+module-str = servz
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # SERVZ

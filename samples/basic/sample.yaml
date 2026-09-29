@@ -1,0 +1,15 @@
+sample:
+  name: servz
+  description: Basic servz sample
+
+common:
+  tags:
+    - servz
+    - ipc
+
+tests:
+  sample.servz.basic:
+    platform_allow:
+      - native_sim
+    integration_platforms:
+      - native_sim
