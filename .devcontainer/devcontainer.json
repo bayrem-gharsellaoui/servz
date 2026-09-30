@@ -2,6 +2,9 @@
   "image": "ghcr.io/zephyrproject-rtos/ci-base:main",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workdir/servz,type=bind",
   "workspaceFolder": "/workdir",
+  "mounts": [
+    "source=${localWorkspaceFolder}/.vscode,target=/workdir/.vscode,type=bind"
+  ],
   "postCreateCommand": "bash servz/.devcontainer/post-create.sh",
   "remoteUser": "user",
   "containerEnv": {

@@ -28,7 +28,7 @@ rm -rf build/
 Build the application:
 
 ```bash
-west build -b native_sim -p -S cpp -- -DSNIPPET_ROOT="$PWD"
+west build -b native_sim -p
 ```
 
 Run the application executable:
